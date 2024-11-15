@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Training Page</title>
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Include PDF.js script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+</head>
+<body class="training-page">
+    <!-- Navbar section -->
+    <nav class="navbar">
+        <div class="navbar-brand">Reaper <span>Squad</span></div>
+        <div class="navbar-links">
+            <a href="index.html">Home</a>
+            <a href="discord.html">Discord</a>
+        </div>
+    </nav>
+    
+    <!-- Options section -->
+    <main class="training">
+        <h1 style="text-align: center;">Secondary Training Info</h1>
+        <div id="options-container" class="options-container" style="background-color: rgba(0, 0, 0, 0.5); padding: 20px; border-radius: 10px; text-align: center;">
+            <h2>Select an Option</h2>
+            <button id="openPdf">Open PDF</button>
+            <!-- Add more options here if needed -->
+        </div>
+
+        <!-- PDF container -->
+        <div id="pdf-container" style="display: none;"></div>  <!-- Initially hidden -->
+
+        <!-- Navigation buttons -->
+        <div id="pdf-nav" style="display: none;">  <!-- Initially hidden -->
+            <button id="prevPage">Previous</button>
+            <button id="nextPage">Next</button>
+        </div>
+    </main>
+
+    <script>
+        const url = 'images/cqb.pdf';  // Your PDF file location
+        let pdfDoc = null;  // Will hold the loaded PDF document
+        let currentPage = 1;  // Current page number
+        let totalPages = 0;  // Total pages in the PDF
+        const defaultScale = 1.0;  // Default zoom level
+
+        // Function to open the PDF
+        document.getElementById('openPdf').addEventListener('click', () => {
+            // Hide options container
+            document.getElementById('options-container').style.display = 'none';
+            
+            // Show PDF container and navigation buttons
+            document.getElementById('pdf-container').style.display = 'block';
+            document.getElementById('pdf-nav').style.display = 'block';
+            loadPdf();  // Load the PDF
+        });
+
+        function loadPdf() {
+            // Initialize PDF.js
+            const loadingTask = pdfjsLib.getDocument(url);
+            loadingTask.promise.then(pdf => {
+                pdfDoc = pdf;
+                totalPages = pdf.numPages;
+                console.log('PDF loaded');
+                renderPage(currentPage);  // Render the first page
+            });
+        }
+
+        // Render a specific page
+        function renderPage(pageNum) {
+            pdfDoc.getPage(pageNum).then(page => {
+                const scale = defaultScale;  // Use default scale for zoom level
+                const viewport = page.getViewport({ scale });
+
+                // Prepare canvas to render the page
+                const canvas = document.createElement('canvas');
+                const context = canvas.getContext('2d');
+                canvas.width = viewport.width;
+                canvas.height = viewport.height;
+
+                // Render PDF page into canvas context
+                const renderContext = {
+                    canvasContext: context,
+                    viewport: viewport
+                };
+                page.render(renderContext);
+
+                // Clear the previous page and append the new canvas
+                const pdfContainer = document.getElementById('pdf-container');
+                pdfContainer.innerHTML = '';  // Clear existing content
+                pdfContainer.appendChild(canvas);
+
+                // Ensure container is tall enough for the page
+                pdfContainer.style.height = `${viewport.height}px`;  // Dynamically adjust height
+            });
+        }
+
+        // Next page button functionality
+        document.getElementById('nextPage').addEventListener('click', () => {
+            if (currentPage < totalPages) {
+                currentPage++;
+                renderPage(currentPage);
+            }
+        });
+
+        // Previous page button functionality
+        document.getElementById('prevPage').addEventListener('click', () => {
+            if (currentPage > 1) {
+                currentPage--;
+                renderPage(currentPage);
+            }
+        });
+    </script>
+</body>
+</html>

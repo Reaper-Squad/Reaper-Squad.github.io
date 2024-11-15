@@ -1,0 +1,532 @@
+html {
+    scroll-behavior: smooth;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Color scheme */
+:root {
+    --primary-bg: #1a1a1a;
+    --accent-color: #c62828;
+    --text-color: #f0f0f0;
+    --navbar-bg: rgba(26, 38, 41, 0.8);
+    --overlay-bg: rgba(0, 0, 0, 0.7);
+}
+
+/* Set the minimum height for main content */
+main {
+    background: url('images/tavr.jpeg') no-repeat center center/cover; 
+    background-attachment: fixed;
+    background-size: cover; 
+    position: relative; 
+    z-index: -1;
+}
+
+main.training {
+    position: absolute; 
+    width: 100%; 
+    top: 50px;
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    height: 100vh; 
+    flex-direction: column;
+    background: url('images/tavr2.jpeg') no-repeat center center/cover; 
+    background-attachment: fixed;
+    background-size: cover; 
+    position: relative; 
+    z-index: -1;
+}
+
+/* Adjust the gradient background for non-training pages */
+body {
+    font-family: 'Roboto', sans-serif;
+    color: var(--text-color);
+    background: linear-gradient(180deg, #1a1a1a 20%, #2d2d2d 100%);
+    overflow-x: hidden;
+}
+
+/* Specific background styling for training page */
+body.training-page {
+    background: url('images/tavr2.jpeg') no-repeat center center/cover;
+    background-attachment: fixed; /* Optional: keeps the background fixed during scrolling */
+    background-size: cover;
+    position: relative; /* Ensure background stays behind content */
+    z-index: -1; /* Ensures background stays below other content */
+}
+
+body.discord-page {
+    background: url('images/tavr3.jpg') no-repeat center center/cover; 
+    background-attachment: fixed;
+    background-size: cover; 
+    position: relative; 
+    z-index: -1; 
+}
+
+body.index-page {
+    background: url('images/tavr.jpeg') no-repeat center center/cover; 
+    background-attachment: fixed;
+    background-size: cover; 
+    position: relative; 
+    z-index: -1; 
+}
+
+/* Navbar */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: var(--navbar-bg);
+    color: var(--text-color);
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 25px;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+}
+
+.navbar-brand {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.7rem;
+    font-weight: 600;
+    color: var(--text-color);
+    letter-spacing: 1px;
+}
+
+.navbar-brand span {
+    color: var(--accent-color);
+}
+
+.navbar-links a {
+    color: var(--text-color);
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: 700;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.navbar-links a:hover {
+    color: var(--accent-color);
+    transform: scale(1.1);
+}
+
+/* Hero Section */
+.hero-section {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Hero overlay with two vertically stacked boxes */
+.hero-overlay {
+    display: flex;
+    flex-direction: column; /* Stacks boxes vertically */
+    align-items: center;
+    width: 80%;
+    max-width: 600px;
+}
+
+/* Hero text box */
+.hero-text-box,
+.ratings-box {
+    width: 100%;
+    padding: 20px;
+    color: white;
+    background: var(--overlay-bg); /* Semi-transparent background for readability */
+    border-radius: 10px;
+    margin: 10px 0; /* Vertical spacing between boxes */
+    text-align: center;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.4);
+}
+
+.hero-text-box h1 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.hero-text-box p {
+    font-size: 1.2rem;
+}
+
+/* Ratings box */
+.ratings-box h2 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+}
+
+.ratings-box ul {
+    list-style: none;
+    padding: 0;
+}
+
+.ratings-box li {
+    margin: 10px 0;
+}
+
+.ratings-box a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.ratings-box a:hover {
+    color: var(--accent-color);
+    transform: scale(1.1);
+}
+
+/* Footer */
+.footer {
+    background-color: #0e1e0f;
+    color: var(--text-color);
+    padding: 20px;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.discordInvite {
+    padding-top: 10px; 
+    display: flex; /* Use flexbox for centering */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    margin: 20px 0; /* Add margin for spacing */
+}
+
+/* PDF Section Styling */
+#pdf-container {
+    width: 100%;
+    max-width: 1000px;  /* Set a max-width for responsiveness */
+    margin: 20px auto;
+    overflow-y: auto;  /* Enable vertical scrolling */
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #fff;  /* White background for the PDF container */
+    padding: 0;
+}
+
+#pdf-container canvas {
+    display: block;  /* Removes default inline-block spacing */
+    margin: 0 auto;  /* Centers the canvas */
+    max-width: 100%;  /* Ensure the canvas is responsive */
+    height: auto;  /* Keeps the aspect ratio of the PDF page */
+}
+
+#pdf-nav {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#pdf-nav button {
+    padding: 10px 20px;
+    margin: 0 10px;
+    font-size: 16px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#pdf-nav button:hover {
+    background-color: #555;
+}
+
+/* Button styling for options */
+#openPdf {
+    padding: 10px 20px;  /* Padding for the button */
+    font-size: 16px;  /* Font size */
+    background-color: var(--accent-color);  /* Use the accent color */
+    color: var(--text-color);  /* Text color */
+    border: none;  /* Remove default border */
+    border-radius: 5px;  /* Rounded corners */
+    cursor: pointer;  /* Pointer cursor on hover */
+    transition: background-color 0.3s ease, transform 0.3s ease;  /* Smooth transition */
+    font-weight: bold;  /* Bold text */
+    margin: 10px 0;  /* Margin for spacing */
+}
+
+#openPdf:hover {
+    background-color: #c62828;  /* Darker shade on hover */
+    transform: scale(1.05);  /* Slightly enlarge on hover */
+}
+
+#discordData, #discordInfo {
+    display: flex;
+    height: 50px;
+}
+
+#callToAction, #callToAction-clicked {
+    bottom: 0;
+    cursor: pointer;
+    height: 40px;
+    left: 0;
+    min-height: 32px;
+    min-width: 73px;
+    position: relative;
+    right: 0;
+    top: 0;
+    align-self: center;
+    margin: 0 0 0 10px;
+    padding: 2px 16px;
+}
+
+#buttonText, #introText, #serverNameBox, #status {
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+@font-face {
+    font-family: Whitney;
+    font-weight: 300;
+    src: url(https://discordapp.com/assets/6c6374bad0b0b6d204d8d6dc4a18d820.woff) format("woff");
+}
+
+@font-face {
+    font-family: Whitney;
+    font-weight: 400;
+    src: url(https://discordapp.com/assets/e8acd7d9bf6207f99350ca9f9e23b168.woff) format("woff");
+}
+
+@font-face {
+    font-family: Whitney;
+    font-weight: 500;
+    src: url(https://discordapp.com/assets/3bdef1251a424500c1b3a78dea9b7e57.woff) format("woff");
+}
+
+@font-face {
+    font-family: Whitney;
+    font-weight: 600;
+    src: url(https://discordapp.com/assets/be0060dafb7a0e31d2a1ca17c0708636.woff) format("woff");
+}
+
+@font-face {
+    font-family: Whitney;
+    font-weight: 700;
+    src: url(https://discordapp.com/assets/8e12fb4f14d9c4592eb8ec9f22337b04.woff) format("woff");
+}
+
+.noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#discordInviteBox {
+    background-color: #37393e;
+    display: inline-block;
+}
+
+#discordInvite {
+    text-align: left;
+    box-sizing: border-box;
+    color: #fff;
+    background: rgba(47, 49, 54, .6);
+    border: 1px solid rgba(47, 49, 54, .9);
+    border-radius: 8px; /* Optional: Add rounded corners */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Optional: Add shadow for depth */
+    font: normal normal 400 normal 16px/16px Whitney, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 10px 15px 10px 10px;
+    display: inline-block;
+}
+
+#offlineInd, #onlineInd {
+    height: 8px;
+    width: 8px;
+    border-radius: 50%;
+    margin: 0 4px 0 0;
+}
+
+#introText {
+    color: #b9bbbe;
+    height: 16px;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+    flex: 1 1 0%;
+    font: normal normal 600 normal 12px/16px Whitney, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    margin: 0 0 8px;
+}
+
+#serverImg {
+    background-position: 50% 50%;
+    bottom: 0;
+    cursor: pointer;
+    height: 50px;
+    left: 0;
+    position: relative;
+    right: 0;
+    top: 0;
+    width: 50px;
+    border-radius: 15px;
+    flex: 0 0 auto;
+    margin: 0 10px 0 0;
+}
+
+#discordInviteError {
+    background-color: red;
+    color: #fff;
+}
+
+#discordInfo {
+    align-items: stretch;
+    justify-content: center;
+    flex: 1 1 auto;
+    flex-flow: column nowrap;
+}
+
+#callToAction, #statusIndicators {
+    align-items: center;
+    display: flex;
+}
+
+#serverNameBox {
+    color: #f6f6f7;
+    cursor: pointer;
+    height: 20px;
+    font: normal normal 600 normal 16px/20px Whitney, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    margin: 0 0 4px;
+}
+
+#serverNameBox:hover {
+    text-decoration: underline;
+}
+
+#status, #statusIndicators {
+    font: normal normal 600 normal 12px/16px Whitney, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #72767d;
+    height: 16px;
+}
+
+#statusIndicators {
+    justify-content: flex-start;
+}
+
+#onlineInd {
+    color: #72767d;
+    column-rule-color: #72767d;
+    background: #43b581;
+    font: italic normal 600 normal 12px/16px Whitney, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+#numOnline {
+    color: #72767d;
+    display: block;
+    height: 16px;
+    font: normal normal 600 normal 12px/16px Whitney, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    margin: 0 8px 0 0;
+}
+
+#offlineInd {
+    color: #72767d;
+    background: #747f8d;
+    font: italic normal 600 normal 12px/16px Whitney, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+#numTotal {
+    color: #72767d;
+    display: block;
+    height: 16px;
+    font: normal normal 600 normal 12px/16px Whitney, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+#callToAction {
+    color: #fff;
+    border: 0;
+    justify-content: center;
+    background: #43b581;
+    border-radius: 3px;
+    font: normal normal 500 normal 14px/20px Whitney, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    transition: background-color .17s ease 0s;
+}
+
+#callToAction:hover {
+    background-color: #3ca374;
+}
+
+#callToAction-clicked {
+    color: #dcddde;
+    display: flex;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    background: rgba(0, 0, 0, 0);
+    border: 1px solid rgba(114, 118, 126, .298);
+    border-radius: 3px;
+    font: normal normal 500 normal 14px/20px Whitney, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    transition: color .17s ease 0s, background-color .17s ease 0s, border-color .17s ease 0s;
+}
+
+#discordPoly, #gDiscord {
+    white-space: nowrap;
+    word-wrap: break-word;
+    column-rule-color: #dcddde;
+    user-select: none;
+    fill: none;
+    border: 0 #dcddde;
+    overflow-wrap: break-word;
+    cursor: pointer;
+    text-align: center;
+    font: normal normal 500 normal 14px/20px Whitney, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+#callToAction-clicked:hover {
+    border-color: hsla(218, 5%, 47%, .6);
+}
+
+#discordSVG {
+    color: #dcddde;
+    height: 18px;
+    width: 18px;
+    margin: 0 0 0 8px;
+}
+
+#gDiscord {
+    fill-rule:evenodd;
+}
+
+#discordPoly {
+    text-decoration: none solid #dcddde;
+    fill-rule:evenodd;
+    stroke: #dcddde;
+    stroke-width: 2px;
+    caret-color: #dcddde;
+    outline: #dcddde 0;
+}
+
+#joinedDiscord {
+    color: #dcddde;
+    cursor: pointer;
+    display: flex;
+    height: 20px;
+    overflow-wrap: break-word;
+    text-align: center;
+    font: normal normal 500 normal 14px/20px Whitney, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    overflow: hidden;
+}
+
+#buttonText {
+    cursor: pointer;
+    display: flex;
+    height: 20px;
+    text-align: center;
+    font: normal normal 500 normal 14px/20px Whitney, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    margin: 0 8.83px;
+}
+
+.loadHidden {
+    display: none;
+}
