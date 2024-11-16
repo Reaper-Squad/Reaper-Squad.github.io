@@ -17,10 +17,17 @@
     <nav class="navbar">
         <div class="navbar-brand">Reaper <span>Squad</span></div>
         <div class="navbar-links">
-            <a href="#about">About</a>
-            <a href="secondary.html">Training</a>
-            <a href="discord.html">Discord
-            </a>
+            <a href="index.html">Home</a>
+            <a href="discord.html">Discord</a>
+            <div class="dropdown">
+                <button class="dropbtn">Training</button>
+                <div class="dropdown-content">
+                    <a href="secondary.html">Secondary</a>
+                    <a href="#primary">Primary</a>
+                    <a href="#cqb">CQB</a>
+                    <a href="#advanced">Advanced</a>
+                </div>
+            </div>
         </div>
     </nav>
 
@@ -45,5 +52,64 @@
         </div>
     </section>
 
+    <!-- Loader -->
+    <div class="loader" id="loader"></div>
+
+    <!-- Trigger button for modal -->
+    <button id="openModal">Open Modal</button>
+
+    <!-- Modal structure -->
+    <div id="myModal" class="modal">
+            <img src="images/Ferrum.png" alt="Recruiting Picture">
+
+            <a id="joinSquad" href="discord.html" class="button-link">Join</a>
+    </div>
+
+    <!-- Dark mode toggle button -->
+    <button id="darkModeToggle">Toggle Dark Mode</button>
+
+    <script>
+        // Show loader on page load
+        window.onload = function() {
+            const loader = document.getElementById('loader');
+            loader.style.display = 'none'; // Hide loader after loading
+            const theme = localStorage.getItem('theme');
+            if (theme === 'dark') {
+                document.body.classList.add('dark-mode');
+            }
+        };
+
+        // JavaScript for dark mode toggle
+        document.getElementById('darkModeToggle').addEventListener('click', function() {
+            document.body.classList.toggle('dark-mode');
+            if (document.body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
+            } else {
+                localStorage.setItem('theme', 'light');
+            }
+        });
+
+                // JavaScript for modal functionality
+        // JavaScript for modal functionality
+        var modal = document.getElementById("myModal");
+
+        // Function to open the modal (for triggering the modal to open)
+        function openModal() {
+            modal.style.display = "flex";  // Change to flex to center the modal
+        }
+
+        // Function to close the modal when clicked outside the image
+        window.onclick = function(event) {
+            // If the user clicks outside the image (on the modal background), close the modal
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        // Trigger the modal open functionality when the button is clicked
+        document.getElementById("openModal").onclick = openModal;
+
+    </script>
+    </footer>
 </body>
 </html>
