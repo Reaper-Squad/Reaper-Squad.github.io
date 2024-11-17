@@ -41,7 +41,7 @@
             </div>
             <!-- Right box with Ratings links -->
             <div class="ratings-box">
-                <h2>Ratings</h2>
+                <h2>Certifications</h2>
                 <ul>
                     <li><a href="secondary.html">Secondary</a></li>
                     <li><a href="#primary">Primary</a></li>
@@ -55,14 +55,10 @@
     <!-- Loader -->
     <div class="loader" id="loader"></div>
 
-    <!-- Trigger button for modal -->
-    <button id="openModal">Open Modal</button>
-
     <!-- Modal structure -->
-    <div id="myModal" class="modal">
-            <img src="images/Ferrum.png" alt="Recruiting Picture">
-
-            <a id="joinSquad" href="discord.html" class="button-link">Join</a>
+    <div id="myModal" class="modal" style="display: none;">
+        <img src="images/Ferrum.png" alt="Recruiting Picture">
+        <a id="joinSquad" href="discord.html" class="button-link">Join</a>
     </div>
 
     <!-- Dark mode toggle button -->
@@ -73,9 +69,18 @@
         window.onload = function() {
             const loader = document.getElementById('loader');
             loader.style.display = 'none'; // Hide loader after loading
+
+            // Dark mode logic
             const theme = localStorage.getItem('theme');
             if (theme === 'dark') {
                 document.body.classList.add('dark-mode');
+            }
+
+            // Show modal on first visit to Discord page
+            if (window.location.pathname.includes('discord.html') && !localStorage.getItem('modalShown')) {
+                const modal = document.getElementById("myModal");
+                modal.style.display = "flex"; // Show the modal
+                localStorage.setItem('modalShown', 'true'); // Set the flag to indicate it has been shown
             }
         };
 
@@ -89,14 +94,8 @@
             }
         });
 
-                // JavaScript for modal functionality
-        // JavaScript for modal functionality
+        // Modal functionality
         var modal = document.getElementById("myModal");
-
-        // Function to open the modal (for triggering the modal to open)
-        function openModal() {
-            modal.style.display = "flex";  // Change to flex to center the modal
-        }
 
         // Function to close the modal when clicked outside the image
         window.onclick = function(event) {
@@ -104,12 +103,7 @@
             if (event.target == modal) {
                 modal.style.display = "none";
             }
-        }
-
-        // Trigger the modal open functionality when the button is clicked
-        document.getElementById("openModal").onclick = openModal;
-
+        };
     </script>
-    </footer>
 </body>
 </html>
