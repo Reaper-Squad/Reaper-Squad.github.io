@@ -12,16 +12,7 @@
         <div class="navbar-brand">Reaper <span>Squad</span></div>
         <div class="navbar-links">
             <a href="index.html">Home</a>
-            <a href="discord.html">Discord</a>
-            <div class="dropdown">
-                <button class="dropbtn">Training</button>
-                <div class="dropdown-content">
-                    <a href="secondary.html">Secondary</a>
-                    <a href="#primary">Primary</a>
-                    <a href="#cqb">CQB</a>
-                    <a href="#advanced">Advanced</a>
-                </div>
-            </div>
+            <a href="secondary.html">Training</a>
         </div>
     </nav>
 
@@ -39,5 +30,33 @@
             </div>
         </div>
     </section>
+
+    <!-- Modal structure -->
+    <div id="myModal" class="modal" style="display: none;"> <!-- Ensure it's hidden by default -->
+        <img src="images/Ferrum.png" alt="Recruiting Picture">
+        <a id="joinSquad" href="discord.html" class="button-link">Join</a>
+    </div>
+
+    <script>
+        // Show the modal when the page loads, but only if it hasn't been shown before
+        window.onload = function() {
+            const modal = document.getElementById("myModal");
+            
+            // Check if the modal has been shown before
+            if (!localStorage.getItem('modalShown')) {
+                modal.style.display = "flex"; // Show the modal
+                localStorage.setItem('modalShown', 'true'); // Set the flag to indicate it has been shown
+            }
+        };
+
+        // Function to close the modal when clicked outside the image
+        window.onclick = function(event) {
+            var modal = document.getElementById("myModal");
+            // If the user clicks outside the modal content, close the modal
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        };
+    </script>
 </body>
 </html>
